@@ -1,7 +1,6 @@
 import os
 import pickle
 from flask import Flask, render_template, jsonify
-from sklearn.ensemble import RandomForestClassifier
 
 from static.python import ModelTrainer
 
