@@ -1,34 +1,28 @@
-import os
-import pickle
 from flask import Flask, render_template, jsonify
+from static.python import SpamCatcher
 
-from static.python import ModelTrainer
+spam_catcher = SpamCatcher()
+spam_catcher.set_model()
 
 app = Flask(__name__)
-
-# Load model if available
-if os.path.isfile("static/data/model.pkl"):
-
-    with open("static/data/model.pkl", "rb") as input_file:
-        model = pickle.load(input_file)
-
-# Otherwise instantiate and save model
-else:
-    model = ModelTrainer()
-    model.start()
-
-    with open("static/data/model.pkl", "wb") as output_file:
-        pickle.dump(model, output_file)
 
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
+
 @app.route("/inspect")
 def inspect():
-    return jsonify({'top_features': model.top_features,
-                    'accuracy': model.accuracy})
+    return jsonify({'top_features': spam_catcher.top_features,
+                    'accuracy': spam_catcher.accuracy})
+
+
+@app.route("/classify")
+def classify():
+
+    # Note: this'll need to TF-IDF the string from the user
+    return jsonify({})
 
 
 if __name__ == "__main__":

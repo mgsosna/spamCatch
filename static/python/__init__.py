@@ -1,1 +1,1 @@
-from .model_trainer import ModelTrainer
+from .spam_catcher import SpamCatcher
