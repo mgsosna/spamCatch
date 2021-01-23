@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 DATA_PATH = "static/data/data.csv"
-N_TOP_FEATURES = 4   # Number of features to return for 'inspect' endpoint
+N_TOP_FEATURES = 10   # Number of features to return for 'inspect' endpoint
 
 
 class ModelTrainer:
@@ -80,7 +80,7 @@ class ModelTrainer:
         rf.fit(X_train, y_train)
 
         self.model = rf
-        self.accurcy = round(accuracy_score(rf.predict(X_test), y_test), 4)
+        self.accuracy = round(accuracy_score(rf.predict(X_test), y_test), 4)
         self.top_features = self._get_top_features(list(X_train))
         return None
 
@@ -105,5 +105,4 @@ class ModelTrainer:
         tuple_list = [*zip(features, self.model.feature_importances_.round(4))]
         sorted_list = sorted(tuple_list, key = lambda x: x[1], reverse=True)
 
-        return pd.DataFrame(sorted_list[:N_TOP_FEATURES],
-                            columns=['term', 'weight'])
+        return sorted_list[:N_TOP_FEATURES]
