@@ -13,7 +13,7 @@ if os.path.isfile("static/data/model.pkl"):
     with open("static/data/model.pkl", "rb") as input_file:
         model = pickle.load(input_file)
 
-# Otherwise instantiate and train model
+# Otherwise instantiate and save model
 else:
     model = ModelTrainer()
     model.start()
@@ -28,7 +28,6 @@ def index():
 
 @app.route("/inspect")
 def inspect():
-    print(vars(model))
     return jsonify({'top_features': model.top_features,
                     'accuracy': model.accuracy})
 
