@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify
 from static.python import SpamCatcher
 
 spam_catcher = SpamCatcher()
-spam_catcher.set_model()
+spam_catcher.set_model(save_on_new=True)
 
 app = Flask(__name__)
 
@@ -18,11 +18,9 @@ def inspect():
                     'accuracy': spam_catcher.accuracy})
 
 
-@app.route("/classify")
-def classify():
-
-    # Note: this'll need to TF-IDF the string from the user
-    return jsonify({})
+@app.route("/classify/<string:text>")
+def classify(text):
+    return jsonify(spam_catcher.classify_string(text))
 
 
 if __name__ == "__main__":

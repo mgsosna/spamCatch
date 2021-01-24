@@ -45,7 +45,11 @@ class SpamCatcher:
         if os.path.isfile(MODEL_PATH):
             logging.debug(f"Using existing model at {MODEL_PATH}")
             with open(MODEL_PATH, "rb") as input_file:
-                self.model = pickle.load(input_file)
+                obj = pickle.load(input_file)
+                self.tfidf_vectorizer = obj['tfidf_vectorizer']
+                self.model = obj['model']
+                self.accuracy = obj['accuracy']
+                self.top_features = obj['top_features']
 
         else:
             logging.debug(f"No model at {MODEL_PATH}; training new model")
@@ -54,7 +58,7 @@ class SpamCatcher:
             if save_on_new:
                 logging.debug(f"Saving new model to {MODEL_PATH}")
                 with open(MODEL_PATH, "wb") as output_file:
-                    pickle.dump(self.model, output_file)
+                    pickle.dump(vars(self), output_file)
 
         return None
 
@@ -97,18 +101,27 @@ class SpamCatcher:
         | -------
         |  pd.DataFrame
         """
-        vectorizer = TfidfVectorizer(use_idf=True)
+        if not self.tfidf_vectorizer:
+            self.set_tfidf_vectorizer(docs)
 
-        # TODO: this should be just "fit", then we transform later. Save the "fit" object to self
-        self.tfidf_vectorizer = None
-        vectors = vectorizer.fit_transform(docs)
+        # Transform documents into TF-IDF features
+        features = self.tfidf_vectorizer.transform(docs)
 
         # Reshape and add back ham/spam label
-        feature_df = pd.DataFrame(vectors.todense(),
-                                  columns=vectorizer.get_feature_names())
+        feature_df = pd.DataFrame(features.todense(),
+                                  columns=self.tfidf_vectorizer.get_feature_names())
         feature_df.insert(0, 'label', labels)
 
         return feature_df
+
+    def set_tfidf_vectorizer(self,
+                             training_docs: pd.Series) -> None:
+        """
+        | Create the TF-IDF vectorizer
+        """
+        self.tfidf_vectorizer = TfidfVectorizer(stop_words='english')
+        self.tfidf_vectorizer.fit(training_docs)
+        return None
 
     def train_model(self,
                     df: pd.DataFrame) -> None:
@@ -117,6 +130,7 @@ class SpamCatcher:
         X = df.iloc[:, 1:]
         y = df.iloc[:, 0]
 
+        # Set spam as target
         y.replace({'ham': 0, 'spam': 1}, inplace=True)
 
         X_train, X_test, y_train, y_test = train_test_split(X, y)
@@ -151,3 +165,8 @@ class SpamCatcher:
         sorted_list = sorted(tuple_list, key=lambda x: x[1], reverse=True)
 
         return sorted_list[:N_TOP_FEATURES]
+
+    def classify_string(self,
+                        text: str) -> float:
+        vec = self.tfidf_vectorizer.transform([text])
+        return self.model.predict_proba(vec)[0][1]
