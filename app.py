@@ -20,6 +20,7 @@ def inspect():
 
 @app.route("/classify/<string:text>")
 def classify(text):
+    print(spam_catcher.classify_string(text))
     return jsonify(spam_catcher.classify_string(text))
 
 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Classifying spam!</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/reset.css">
+</head>
+<body>
+<h1>Spam blaster. Test out our classifier!</h1>
+<input id="text" size="100" placeholder="Hey want to go bowling?" onChange="onSubmit(this.value)">
+
+<div id="printText" class="center" style="font-size: 20px"></div>
+<div id="spamProb" class="probDisplay"></div>
+<div id="decision" class="center" style="font-size: 20px"></div>
+</body>
+
+
+<script src="../static/js/script.js"></script>
+</html>
