@@ -1,6 +1,6 @@
 const SPAM_API = "/classify"
-var spamProbTemplate = `Spam probability: <span style="color: {0}">{1}</span><span style="color:gray">%</span>`;
-var decisionTemplate = `<strong>Decision:</strong> {0}`;
+var spamProbTemplate = `Spam probability: <span style="color: {0}">{1}</span><span style="color:white">%</span>`;
+var decisionTemplate = `<span style="color: {0}">{1}</span>`;
 
 function onSubmit(text) {
 
@@ -22,21 +22,21 @@ function updateSpamProb(value) {
 
          var color = prob2color((1-prob));
          div.html(String.format(spamProbTemplate, color, 100*prob));
-         updateDecision(prob);
+         updateDecision(prob, color);
      });
 }
 
-function updateDecision(prob) {
+function updateDecision(prob, color) {
     var div = d3.select("#decision");
 
     if (prob < 0.25) {
-        div.html(String.format(decisionTemplate, "looks like ham!"));
+        div.html(String.format(decisionTemplate, color, "Looks like ham!"));
     }
     else if (prob > 0.25 && prob < 0.5) {
-        div.html(String.format(decisionTemplate, "hm... something's fishy..."));
+        div.html(String.format(decisionTemplate, color, "Hm... something's fishy..."));
     }
     else if (prob > 0.5) {
-        div.html(String.format(decisionTemplate, "look out, it's spam!"));
+        div.html(String.format(decisionTemplate, color, "Look out, it's spam!"));
     }
 }
 

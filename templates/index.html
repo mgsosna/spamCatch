@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="../static/css/reset.css">
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
-<body>
+<body style="background-color: black; color: white">
 
     <div class="hero text-center">
     </div>
 
 <div class="text-center">
-    <h1>Let's blast some spam.</h1>
-<input id="text" size="100" placeholder="Type a text message here" onChange="onSubmit(this.value)">
+    <h1 style="color:white">Let's blast some spam.</h1>
+<input id="text" size="100" placeholder="Type a text message here" onChange="onSubmit(this.value)"
+ style="background-color: black; color: white; border-color: black">
 </div>
 
-<div id="spamProb" class="probDisplay"></div>
-<div id="decision" class="center" style="font-size: 20px"></div>
+<h1 id="spamProb" class="text-center spamProb"></h1>
+<div id="decision" class="text-center" style="font-size: 20px"></div>
 </body>
 
 
