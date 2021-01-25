@@ -1,4 +1,4 @@
 Flask
-uwsgi
+pandas
 sklearn
 gunicorn
