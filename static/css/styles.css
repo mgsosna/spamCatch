@@ -1,0 +1,17 @@
+.hero {
+    position: relative;
+    height: 240px;
+    padding: 1px;
+    margin-top: -2px;
+    margin-left: -10px;
+    background: black;
+        background-attachment: scroll;
+        /* image source: https://www.wsj.com/articles/getting-attacked-by-robotexts-heres-what-to-do-11566385200 */
+        background-image: url("../images/spam.png");
+        background-size: auto;
+        background-size: cover;
+}
+
+.text-center {
+    text-align: center;
+}

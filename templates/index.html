@@ -6,10 +6,17 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-<h1>Spam blaster. Test out our classifier!</h1>
-<input id="text" size="100" placeholder="Hey want to go bowling?" onChange="onSubmit(this.value)">
+
+    <div class="hero text-center">
+    </div>
+
+<div class="text-center">
+    <h1>Let's blast some spam.</h1>
+<input id="text" size="100" placeholder="Type a text message here" onChange="onSubmit(this.value)">
+</div>
 
 <div id="spamProb" class="probDisplay"></div>
 <div id="decision" class="center" style="font-size: 20px"></div>
