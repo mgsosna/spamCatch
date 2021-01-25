@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SpamCatch: About</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <style>
+            #footer {
+                position: fixed;
+                padding: 10px 10px 0px 10px;
+                bottom: 0;
+                width: 100%;
+                height: 40px;
+                font-size: 16px;
+            }
+    </style>
+</head>
+<body style="background-color: black; color: white; font-size: 16px">
+
+    <div class="hero text-center">
+    </div>
+
+<p style="margin: 50px">SpamCatch is a Flask app written by <a href="https://mattsosna.com">Matt Sosna</a>.
+The back-end consists of a random forest model trained on the open-source
+<a href="https://www.kaggle.com/uciml/sms-spam-collection-dataset">SMS spam collection dataset</a> (plus a few spam messages
+the author's received...) that has been processed with sklearn's TfIdfVectorizer. Check out the source code <a href="https://github.com/mgsosna/spamCatch">here</a>.
+</p>
+
+<p style="font-size: 14px; margin: 50px">Image credit: <a href="https://www.wsj.com/articles/getting-attacked-by-robotexts-heres-what-to-do-11566385200">Wall Street Journal</a>
+</p>
+</html>
+
+<div id="footer">
+    <a href="/" style="color:orange">Back to catching spam</a>
+</div>
