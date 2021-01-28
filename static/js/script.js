@@ -2,8 +2,8 @@ const SPAM_API = "/classify"
 var spamProbTemplate = `Spam probability: <span style="color: {0}">{1}</span><span style="color:white">%</span>`;
 var decisionTemplate = `<span style="color: {0}">{1}</span>`;
 
-function onSubmit(text) {
-
+function onSubmit() {
+    var text = d3.select("#text").property("value");
     console.log(text);
     updateSpamProb(text);
 }
@@ -11,7 +11,6 @@ function onSubmit(text) {
 function updatePrintText(value) {
     var div = d3.select("#printText");
     div.text(value);
-
 }
 
 function updateSpamProb(value) {
@@ -19,9 +18,8 @@ function updateSpamProb(value) {
     var url = `${SPAM_API}/${value}`;
 
     d3.json(url).then(prob => {
-
          var color = prob2color((1-prob));
-         div.html(String.format(spamProbTemplate, color, 100*prob));
+         div.html(String.format(spamProbTemplate, color, Math.round(100*prob)));
          updateDecision(prob, color);
      });
 }
@@ -64,3 +62,6 @@ String.format = function() {
       }
       return s;
   }
+
+d3.select("#text").on("change", onSubmit);
+d3.select("#button").on("click", onSubmit);

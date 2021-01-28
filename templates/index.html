@@ -15,19 +15,20 @@
                 width: 100%;
                 height: 40px;
                 font-size: 16px;
+                text-align: center;
             }
     </style>
 </head>
 
 <body style="background-color: black; color: white">
 
-    <div class="hero text-center">
-    </div>
+    <div class="hero text-center"></div>
 
 <div class="text-center">
     <h1 style="color:white">Let's catch some spam.</h1>
-<input id="text" size="100" placeholder="Type a text message here" onChange="onSubmit(this.value)"
- style="background-color: black; color: white; border-color: black">
+<input id="text" size="100" placeholder="Type a text message here"
+ style="background-color: black; color: white; border-color: black; font-size:16px">
+ <button id="button" type="button" class="btn-danger" style="font-size:17px">Submit</button>
 </div>
 
 <h1 id="spamProb" class="text-center spamProb"></h1>

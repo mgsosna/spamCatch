@@ -117,7 +117,19 @@ class SpamCatcher:
     def set_tfidf_vectorizer(self,
                              training_docs: pd.Series) -> None:
         """
-        | Create the TF-IDF vectorizer
+        | Fit the TF-IDF vectorizer. Updates self.tfidf_vectorizer
+        |
+        | ---------------------------------------------------------
+        | Parameters
+        | ----------
+        |  training_docs : pd.Series
+        |    An iterable of strings, one per document, to use for
+        |    fitting the TF-IDF vectorizer
+        |
+        |
+        | Returns
+        | -------
+        |  None
         """
         self.tfidf_vectorizer = TfidfVectorizer(stop_words='english')
         self.tfidf_vectorizer.fit(training_docs)
@@ -125,8 +137,23 @@ class SpamCatcher:
 
     def train_model(self,
                     df: pd.DataFrame) -> None:
-        """Assumes labels are in the first column"""
-
+        """
+        | Train a random forest classifier on df. Assumes first column
+        | is labels and all remaining columns are features. Updates
+        | self.model, self.accuracy, and self.top_features
+        |
+        | ------------------------------------------------------------
+        | Parameters
+        | ----------
+        |  df : pd.DataFrame
+        |    The data, where first column is labels and remaining columns
+        |    are features
+        |
+        |
+        | Returns
+        | -------
+        |  None
+        """
         X = df.iloc[:, 1:]
         y = df.iloc[:, 0]
 
@@ -168,5 +195,20 @@ class SpamCatcher:
 
     def classify_string(self,
                         text: str) -> float:
+        """
+        | Get the probability that a string is spam. Transforms the
+        | string into a TF-IDF vector and then returns self.model's
+        | prediction on the vector.
+        |
+        | ---------------------------------------------------------
+        | Parameters
+        | ----------
+        |  text : str
+        |    A raw string to be classified
+        """
+        if not self.tfidf_vectorizer:
+            raise ValueError("Cannot generate predictions; must first "
+                             " set self.tfidf_vectorizer")
+
         vec = self.tfidf_vectorizer.transform([text])
         return self.model.predict_proba(vec)[0][1]
