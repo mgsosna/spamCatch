@@ -226,17 +226,6 @@ Our HTML is stored in the `templates` directory, as Flask expects. We start with
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/reset.css">
     <link rel="stylesheet" href="../static/css/styles.css">
-    <style>
-            #footer {
-                position: fixed;
-                padding: 10px 10px 0px 10px;
-                bottom: 0;
-                width: 100%;
-                height: 40px;
-                font-size: 16px;
-                text-align: center;
-            }
-    </style>
 </head>
 ```
 
@@ -291,7 +280,7 @@ We then have two elements that are empty at loading but will be updated with the
 Finally, we have our footer with a link to the `/about` endpoint, as well as our JavaScript script that will make our page dynamic.
 
 ```html
-<div id="footer">
+<div class="footer">
 <a href="/about" style="color:orange">More info</a>
 </div>
 
