@@ -62,12 +62,13 @@ class SpamCatcher:
 
         return None
 
-    def load_and_train(self) -> None:
+    def load_and_train(self,
+                       data_path: src = DATA_PATH) -> None:
         """
         | Main method for class. Instantiates self.model with random forest
-        | classifier trained on data at DATA_PATH.
+        | classifier trained on CSV at data_path.
         """
-        raw_df = pd.read_csv(DATA_PATH)
+        raw_df = pd.read_csv(data_path)
 
         logging.debug("Extracting features")
         clean_df = self.extract_features(raw_df['label'], raw_df['text'])
