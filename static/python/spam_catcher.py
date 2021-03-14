@@ -63,7 +63,7 @@ class SpamCatcher:
         return None
 
     def load_and_train(self,
-                       data_path: src = DATA_PATH) -> None:
+                       data_path: str = DATA_PATH) -> None:
         """
         | Main method for class. Instantiates self.model with random forest
         | classifier trained on CSV at data_path.
