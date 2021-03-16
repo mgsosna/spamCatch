@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify
-from static.python import SpamCatcher
+from static import SpamCatcher
 
 spam_catcher = SpamCatcher()
 spam_catcher.set_model(save_on_new=True)
@@ -30,4 +30,4 @@ def classify(text):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
