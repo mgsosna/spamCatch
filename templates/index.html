@@ -6,22 +6,20 @@
     <link rel="shortcut icon" type="image/png" href="../static/images/ds_circle.png">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/reset.css">
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 
 <body style="background-color: black; color: white">
 
-    <div class="hero text-center"></div>
+    <div class="hero"></div>
 
 <div class="text-center">
     <h1 style="color:white">Let's catch some spam.</h1>
-<input id="text" size="100" placeholder="Type a text message here"
- style="background-color: black; color: white; border-color: black; font-size:16px">
+<input id="text" size="100" placeholder="Type a text message here" class="black-input">
  <button id="button" type="button" class="btn-danger" style="font-size:17px">Submit</button>
 </div>
 
-<h1 id="spamProb" class="text-center spamProb"></h1>
+<h1 id="spamProb" class="text-center spam-prob"></h1>
 <div id="decision" class="text-center" style="font-size: 20px"></div>
 
 <div class="footer">
