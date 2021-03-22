@@ -30,10 +30,10 @@ function updateDecision(prob, color) {
     if (prob < 0.25) {
         div.html(String.format(decisionTemplate, color, "Looks like ham!"));
     }
-    else if (prob > 0.25 && prob < 0.5) {
+    else if (prob >= 0.25 && prob < 0.5) {
         div.html(String.format(decisionTemplate, color, "Hm... something's fishy..."));
     }
-    else if (prob > 0.5) {
+    else {
         div.html(String.format(decisionTemplate, color, "Look out, it's spam!"));
     }
 }
